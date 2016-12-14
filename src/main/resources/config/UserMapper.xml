@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajin.mybatis.mapper.UserMapper">
+    <!-- 第二种方式，基于mapper接口的方式-->
+    <select id="selectUser" parameterType="int" resultType="com.ajin.mybatis.model.User">
+        select * from userinfo where id = #{id}
+    </select>
+</mapper>
