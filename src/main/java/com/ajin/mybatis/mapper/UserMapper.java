@@ -12,4 +12,10 @@ public interface UserMapper {
     //需要注意的是使用这种方式时，需要对应的UserMapper.xml文件的namespace即为这个接口的全限定名称
     //对应的方法名称和映射文件中的statement的id需要一致
     User selectUser(int id);
+
+    void insertUser(User user);
+
+    void deleteUser(int id);
+
+    void updateUser(User user);
 }

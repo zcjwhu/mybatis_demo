@@ -4,7 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ajin.mybatis.mapper.UserMapper">
     <!-- 第二种方式，基于mapper接口的方式-->
+    <!-- 查询用户 -->
     <select id="selectUser" parameterType="int" resultType="com.ajin.mybatis.model.User">
         select * from userinfo where id = #{id}
     </select>
+
+    <!-- 添加用户 -->
+    <insert id="insertUser" parameterType="com.ajin.mybatis.model.User" >
+        <!--
+        将插入的数据的主键返回,这种适用于自增的主键
+        select last_insert_id()
+        keyProperty:将查询到的主键值设置到parameter指定对象的哪个属性
+        order：上面那句话的执行顺序，相对于insert语句来说它的执行顺序
+        resultType：指定返回结果的数据类型
+        -->
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        <!--
+            使用mysql的uuid生成主键
+            执行过程：
+            首先通过uuid()来获得主键并设置到user对象的id
+            其次在insert执行时，取出user对象中id的属性值
+            <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+               select uuid()
+             </selectKey>
+        -->
+        insert into userinfo(id,name,password) values(#{id},#{name},#{password})
+    </insert>
+
+    <!-- 删除用户 需要指定删除用户的id-->
+    <delete id="deleteUser" parameterType="int">
+        delete from userinfo where id=#{id}
+    </delete>
+
+    <!-- 更新用户 需要传入用户的id，需要传入更新的用户信息 ，parameterType指定user对象-->
+    <update id="updateUser" parameterType="com.ajin.mybatis.model.User">
+        update userinfo set name=#{name},password=#{password} where id=#{id}
+    </update>
 </mapper>
