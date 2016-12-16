@@ -12,6 +12,8 @@
         <!---->
     <!--</settings>-->
 
+
+
     <!--别名定义，主要针对我们自己定义的一些pojo，默认已经包含了很多简单类型的别名定义-->
     <typeAliases>
         <!--单个别名的定义-->
@@ -39,5 +41,6 @@
     <mappers>
         <mapper resource="config/UserMapper.xml"/>
         <mapper resource="config/User.xml"/>
+        <mapper resource="config/StudentMapper.xml"/>
     </mappers>
 </configuration>

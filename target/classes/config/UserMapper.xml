@@ -15,6 +15,7 @@
         <!-- 表示其它普通列-->
         <result column="name_" property="name"></result>
         <result column="password_" property="password"></result>
+
     </resultMap>
 
     <!-- 第二种方式，基于mapper接口的方式-->
