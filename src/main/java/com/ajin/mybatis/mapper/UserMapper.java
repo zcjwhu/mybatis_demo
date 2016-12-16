@@ -1,8 +1,12 @@
 package com.ajin.mybatis.mapper;
 
 import com.ajin.mybatis.model.User;
+import com.ajin.mybatis.model.UserExt;
+import com.ajin.mybatis.model.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+
+import java.util.List;
 
 /**
  * Created by ajin on 16-12-14.
@@ -18,4 +22,10 @@ public interface UserMapper {
     void deleteUser(int id);
 
     void updateUser(User user);
+
+    List<User> selectMulUser(UserVo userVo);
+
+    int selectUserCount(UserVo userVo);
+
+    User selectByIdResultMap(int id);
 }

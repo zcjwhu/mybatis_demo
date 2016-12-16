@@ -4,6 +4,15 @@ package com.ajin.mybatis.model;
  * Created by ajin on 16-12-14.
  */
 public class User {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     private int id;
     private String name;
     private String password;
@@ -31,4 +40,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

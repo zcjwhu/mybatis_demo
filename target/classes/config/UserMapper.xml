@@ -3,6 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ajin.mybatis.mapper.UserMapper">
+    <!--定义resultmap,将包含别名的和user类进行映射
+      id：唯一表示resultmap
+      type：最终映射的java对象类型
+    -->
+    <resultMap id="aliasResultMap" type="com.ajin.mybatis.model.User">
+        <!--id表示查询结果集中的唯一标识-->
+        <!--column:查询出来的列名-->
+        <!--property:type指定的pojo类型中的属性名-->
+        <id column="id_" property="id"></id>
+        <!-- 表示其它普通列-->
+        <result column="name_" property="name"></result>
+        <result column="password_" property="password"></result>
+    </resultMap>
+
     <!-- 第二种方式，基于mapper接口的方式-->
     <!-- 查询用户 -->
     <select id="selectUser" parameterType="int" resultType="com.ajin.mybatis.model.User">
@@ -42,4 +56,23 @@
     <update id="updateUser" parameterType="com.ajin.mybatis.model.User">
         update userinfo set name=#{name},password=#{password} where id=#{id}
     </update>
+
+    <!--处理复杂的输入查询-->
+    <select id="selectMulUser" parameterType="com.ajin.mybatis.model.UserVo" resultType="com.ajin.mybatis.model.User">
+        select id,name,password from userinfo where name=#{user.name}
+    </select>
+
+    <!--用户信息综合查询总数-->
+    <select id="selectUserCount" parameterType="com.ajin.mybatis.model.UserVo" resultType="int">
+        select count(*) from userinfo where name=#{user.name}
+    </select>
+
+    <!--使用resultMap来完成别名输出的映射-->
+    <!-- 如果时引用其它xml中的resultmap,需要加上命名空间-->
+    <select id="selectByIdResultMap" parameterType="int" resultMap="aliasResultMap">
+        select id id_,name name_,password password_ from userinfo where id=#{value}
+    </select>
+
 </mapper>
+
+

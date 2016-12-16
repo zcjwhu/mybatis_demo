@@ -3,8 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--加载属性文件-->
     <properties resource="jdbc.properties">
     </properties>
+
+    <!--全局配置设置-->
+    <!--<settings>-->
+        <!---->
+    <!--</settings>-->
+
+    <!--别名定义，主要针对我们自己定义的一些pojo，默认已经包含了很多简单类型的别名定义-->
+    <typeAliases>
+        <!--单个别名的定义-->
+        <!--<typeAlias type="com.ajin.mybatis.model.User" alias="User"></typeAlias>-->
+        <!--批量别名的定义
+            默认定义的就是类名(首字母大写小写都可以)
+        -->
+        <package name="com.ajin.mybatis.model"></package>
+    </typeAliases>
+
+    <!--类型处理器，完成jdbc类型和java类型之间的转换，一般不需要自定义-->
+
     <environments default="development">
         <environment id="development">
 
