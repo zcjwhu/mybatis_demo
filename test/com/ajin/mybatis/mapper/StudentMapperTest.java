@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -32,6 +33,10 @@ public class StudentMapperTest {
        Student student = new Student();
        student.setSname("zcj");
        student.setSsex("female");
+       List<Integer> ids = new ArrayList<Integer>();
+       ids.add(3);
+       ids.add(4);
+       studentVo.setIds(ids);
        studentVo.setStudent(student);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try{

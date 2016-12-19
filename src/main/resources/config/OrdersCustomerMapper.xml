@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajin.mybatis.mapper.OrdersCustomerMapper">
+    <!--一对一查询，查询订单的时候，附带查出订单的用户信息
+      1.首先编写输入参数类型，比如依据订单的编号
+      2.返回类型：单独的model依据上面的要求肯定不能满足，需要自己定义pojo
+      （1）第一种方式：使用resultType 在定义pojo时，要看以那个为主，这样可以选择继承一个类，然后再把其它的属性加入
+                    因为resultType要求在使用的时候查询出来的属性名和pojo的对象属性名称对应
+    -->
+    <!--<select id="selectOrdersCustomerById" parameterType="int" resultType="com.ajin.mybatis.model.OrdersCustomer">-->
+        <!--select orders.*,customer.cname,customer.cphone from orders,customer-->
+        <!--where orders.cno =customer.cno-->
+            <!--and orders.ono =#{value}-->
+    <!--</select>-->
+    <!--（2）第二种方式：使用resultMap,自己定义resultMap-->
+    <resultMap id="selectOrdersCustomerMap" type="com.ajin.mybatis.model.OrdersCustomerMap">
+        <!-- 配置orders的id和一般属性-->
+        <id column="ono" property="ono"></id>
+        <result column="otime" property="otime"></result>
+        <result column="gno" property="gno"></result>
+        <result column="cno" property="cno"></result>
+        <!-- 配置关联的Customer的属性,将下面查询出来的Customer的属性映射到orderCustomermap里面的customer属性中-->
+        <association property="customer" javaType="com.ajin.mybatis.model.Customer">
+            <id column="cno" property="cno"></id>
+            <result column="cname" property="cname"></result>
+            <result column="cphone" property="cphone"></result>
+        </association>
+    </resultMap>
+    <select id="selectOrdersCustomerMapById" parameterType="int" resultMap="selectOrdersCustomerMap">
+        select orders.*,customer.cname,customer.cphone from orders,customer
+        where orders.cno =customer.cno
+        and orders.ono =#{value}
+    </select>
+
+
+</mapper>
