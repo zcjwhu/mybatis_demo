@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ajin.mybatis.mapper.CustomerOrdersMapper">
+    <resultMap id="CustomerOrdersMap" type="com.ajin.mybatis.model.CustomerOrdersMap" >
+        <!--定义客户信息-->
+        <id column="cno" property="cno"></id>
+        <result column="cname" property="cname"></result>
+        <result column="csex" property="csex"></result>
+        <result column="cphone" property="cphone"></result>
+        <result column="caddress" property="caddress"></result>
+        <!-- 定义客户对应的订单信息，这里是一对多的关系，所以用到collection
+           注意下面用到的ofType而不是javaType
+        -->
+        <collection property="orders" ofType="com.ajin.mybatis.model.Orders">
+            <id column="ono" property="ono"></id>
+            <result column="otime" property="otime"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectCustomerOrdersMap" parameterType="int" resultMap="CustomerOrdersMap">
+        select customer.*,orders.ono,orders.otime
+        from customer,orders
+        where customer.cno = orders.cno and customer.cno=#{value}
+    </select>
+
+
+</mapper>

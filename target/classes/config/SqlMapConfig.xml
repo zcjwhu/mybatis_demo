@@ -43,5 +43,6 @@
         <mapper resource="config/User.xml"/>
         <mapper resource="config/StudentMapper.xml"/>
         <mapper resource="config/OrdersCustomerMapper.xml"></mapper>
+        <mapper resource="config/CustomerOrdersMapper.xml"></mapper>
     </mappers>
 </configuration>
