@@ -11,6 +11,11 @@
     <!--<settings>-->
         <!---->
     <!--</settings>-->
+    <!--配置延迟加载属性，首先打开延迟加载，然后关闭积极加载-->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
 
 
 
@@ -44,5 +49,6 @@
         <mapper resource="config/StudentMapper.xml"/>
         <mapper resource="config/OrdersCustomerMapper.xml"></mapper>
         <mapper resource="config/CustomerOrdersMapper.xml"></mapper>
+        <mapper resource="config/CustomerMapper.xml"></mapper>
     </mappers>
 </configuration>

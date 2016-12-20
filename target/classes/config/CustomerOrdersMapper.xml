@@ -10,7 +10,9 @@
         <result column="csex" property="csex"></result>
         <result column="cphone" property="cphone"></result>
         <result column="caddress" property="caddress"></result>
-        <!-- 定义客户对应的订单信息，这里是一对多的关系，所以用到collection-->
+        <!-- 定义客户对应的订单信息，这里是一对多的关系，所以用到collection
+           注意下面用到的ofType而不是javaType
+        -->
         <collection property="orders" ofType="com.ajin.mybatis.model.Orders">
             <id column="ono" property="ono"></id>
             <result column="otime" property="otime"></result>

@@ -51,4 +51,14 @@ public class Customer {
 
     private String caddress;
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cno=" + cno +
+                ", cname='" + cname + '\'' +
+                ", csex='" + csex + '\'' +
+                ", cphone='" + cphone + '\'' +
+                ", caddress='" + caddress + '\'' +
+                '}';
+    }
 }

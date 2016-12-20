@@ -34,5 +34,24 @@
         and orders.ono =#{value}
     </select>
 
-
+    <!--需求：实现延迟加载，先查询出订单信息，然后再延迟加载订单所对应的用户信息-->
+    <!--定义延迟加载的resultmap，因为只有resultMap有延迟加载的功能，因此这里不能够使用resultType-->
+    <resultMap id="OrdersCustomerLazyLoadingMap" type="com.ajin.mybatis.model.OrdersCustomerMap">
+        <!--配置订单的基本信息-->
+        <id column="ono" property="ono"></id>
+        <result column="otime" property="otime"></result>
+        <result column="gno" property="gno"></result>
+        <result column="cno" property="cno"></result>
+        <!--配置关联的用户信息，使用association实现延迟加载
+        select：用来指定延迟加载查询语句的sql,这里引用了CustomerMapper中的statement,因此需要添加完整命名空间
+        column：用来指定关联的用来关联查询的属性
+        -->
+        <association property="customer" javaType="com.ajin.mybatis.model.Customer" select="com.ajin.mybatis.mapper.CustomerMapper.selectCustomerById" column="cno">
+            <!--需要注意这里和普通的一对一关联查询不一样，这里面不需要写任何东西-->
+        </association>
+    </resultMap>
+    <!--这里面只需要编写单表查询订单的sql语句-->
+    <select id="selectOrdersCustomerLazyLoading" resultMap="OrdersCustomerLazyLoadingMap">
+       select * from orders;
+    </select>
 </mapper>
